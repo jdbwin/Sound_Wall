@@ -11,6 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20160108041444) do
+
+  create_table "reviews", force: :cascade do |t|
+    t.string   "review"
+    t.integer  "rating"
+    t.integer  "user_id"
+    t.integer  "track_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "tracks", force: :cascade do |t|
+    t.string   "title"
+    t.string   "artist"
+    t.string   "url"
+    t.integer  "votes"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "votes", force: :cascade do |t|
+    t.integer  "track_id"
+    t.integer  "user_id"
+    t.integer  "number_of_votes"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
 end
