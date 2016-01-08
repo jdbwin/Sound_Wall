@@ -6,6 +6,7 @@ class AddReviews < ActiveRecord::Migration
       t.integer :rating
       t.references :user
       t.references :track
+      t.timestamps null: false
     end
 
   end

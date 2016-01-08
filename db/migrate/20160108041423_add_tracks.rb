@@ -7,8 +7,7 @@ class AddTracks < ActiveRecord::Migration
       t.string :url
       t.integer :votes
       t.references :user
-      t.datetime :created_at
-      t.datetime :updated_at
+      t.timestamps null: false
     end
   end
 
