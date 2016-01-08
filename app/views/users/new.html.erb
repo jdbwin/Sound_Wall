@@ -1,4 +1,5 @@
-<%= form_for @user, :html => {:multipart => true} do |f| %>
+<%= form_for @user do |f| %>
+
   <% if @user.errors.any? %>
     <div>
       <%= pluralize(@user.errors.count, "error") %> prevented the account from being created:
@@ -9,23 +10,19 @@
       </ul>
     </div>
   <% end %>
-<%# <] <% if current_user and current_user.admin %>
-<%# %>   <div>
-<%# <]     <%= f.label "Admin" %>
-<%# <]     <%= f.check_box :admin %>
-<%# %>   </div>
-<%# <] <% end %>
+
   <div>
     <%= f.label "email" %><br>
-    <%= f.text_field "email" %>
+    <%= f.text_field :email %>
   </div>
   <div>
     <%= f.label "password" %><br>
-    <%= f.password_field "password" %>
+    <%= f.password_field :password %>
   </div>
   <div>
     <%= f.label "password_confirmation" %><br>
-    <%= f.password_field "password_confirmation" %>
+    <%= f.password_field :password_confirmation %>
   </div>
   <div><%= f.submit "Submit" %></div>
+
 <% end %>
