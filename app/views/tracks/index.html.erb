@@ -5,45 +5,24 @@
 <table>
 
   <thead>
-
     <tr>
-
       <th data-field="upvotes">Upvotes</th>
       <th data-field="title">Title</th>
       <th data-field="artist">Artist</th>
       <th data-field="submitted_by">Submitted By</th>
-
     </tr>
-
   </thead>
 
   <tbody>
-
-    <%#<% @tracks.order("upvote_counter desc").each do |track| %>%>
     <% @tracks.each do |track| %>
-
       <tr>
-
-        <%#<td><%= track.upvote_counter %></td>%>
+        <td><%= track.votes %></td>
         <td><a href="/tracks/<%= track.id %>"><%= track.title %></a></td>
         <td><%= track.artist %> </td>
         <td><%= track.user_id %> </td>
-        <td>
-          <form action="/upvote/<%= track.id %>" method="POST">
-
-            <button value="upvote" name="upvote" class="waves-effect waves-light btn blue">Upvote</button>
-
-          </form>
-        </td>
-
+        <td><%= button_to "Upvote", handle_upvote_tracks_path(track_id: track.id) %></td>
       </tr>
-
     <% end %>
+  </tbody>
 
-    </div>
-
-    <div>
-
-      <a href="/logout">Sign Out</a>
-
-    </div>
+</table>

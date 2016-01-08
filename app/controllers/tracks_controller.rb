@@ -16,9 +16,18 @@ class TracksController < ApplicationController
     else
       render :new
     end
+
   end
 
-  protected
+  def handle_upvote
+    @track = Track.find(params[:track_id])
+
+    @track.increment!(:votes)
+    redirect_to tracks_path
+
+  end
+
+  private
 
   def track_params
     params.require(:track).permit(:title, :artist, :url)
