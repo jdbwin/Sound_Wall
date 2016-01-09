@@ -21,9 +21,13 @@ class TracksController < ApplicationController
 
   def handle_upvote
     @track = Track.find(params[:track_id])
-
     @track.increment!(:votes)
-    redirect_to tracks_path
+
+    respond_to do |format|
+      format.html {redirect_to tracks_path}
+      format.json {head :no_content}
+      format.js {render layout: false}
+    end
 
   end
 

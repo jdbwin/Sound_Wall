@@ -16,11 +16,11 @@
   <tbody>
     <% @tracks.each do |track| %>
       <tr>
-        <td><%= track.votes %></td>
+        <td class="vote-counter"><%= track.votes %></td>
         <td><a href="/tracks/<%= track.id %>"><%= track.title %></a></td>
         <td><%= track.artist %> </td>
         <td><%= track.user_id %> </td>
-        <td><%= button_to "Upvote", handle_upvote_tracks_path(track_id: track.id) %></td>
+        <td><%= button_to "Upvote", handle_upvote_tracks_path(track_id: track.id), remote: true, class: 'increment-vote' %></td>
       </tr>
     <% end %>
   </tbody>
