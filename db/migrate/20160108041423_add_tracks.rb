@@ -5,6 +5,7 @@ class AddTracks < ActiveRecord::Migration
       t.string :title
       t.string :artist
       t.string :url
+      t.string :genre
       t.references :user
       t.timestamps null: false
     end
