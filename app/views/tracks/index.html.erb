@@ -16,16 +16,18 @@
   <tbody>
     <% @tracks.each do |track| %>
       <tr>
-        <td class="vote-counter"><%= track.votes.to_i %></td>
+        <td class="vote-counter"><%= track.number_of_votes %></td>
         <td><a href="/tracks/<%= track.id %>"><%= track.title %></a></td>
         <td><%= track.artist %> </td>
         <td><%= track.user_id %> </td>
+        <% unless user_voted(track) %>
         <td>
           <%= button_to "Upvote",
-          handle_upvote_tracks_path(track_id: track.id), 
+          votes_path(track_id: track.id), 
           remote: true, 
           class: 'increment-vote' %>
         </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

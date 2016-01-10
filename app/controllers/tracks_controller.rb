@@ -1,5 +1,7 @@
 class TracksController < ApplicationController
 
+  helper_method :user_voted
+
   def index
     @tracks = Track.all
   end
@@ -19,22 +21,14 @@ class TracksController < ApplicationController
 
   end
 
-  def handle_upvote
-    @track = Track.find(params[:track_id])
-    @track.increment!(:votes)
-
-    respond_to do |format|
-      format.html {redirect_to tracks_path}
-      format.json {head :no_content}
-      format.js {render layout: false}
-    end
-
+  def user_voted(track)
+    track.votes.find_by user_id: current_user.id
   end
 
   private
 
   def track_params
-    params.require(:track).permit(:title, :artist, :url)
+    params.require(:track).permit(:title, :artist, :url).merge(user_id: current_user.id)
   end
 
 end

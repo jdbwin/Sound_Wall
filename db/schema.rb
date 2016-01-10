@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 20160108041444) do
     t.string   "title"
     t.string   "artist"
     t.string   "url"
-    t.integer  "votes"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -42,9 +41,8 @@ ActiveRecord::Schema.define(version: 20160108041444) do
   create_table "votes", force: :cascade do |t|
     t.integer  "track_id"
     t.integer  "user_id"
-    t.integer  "number_of_votes"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

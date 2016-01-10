@@ -1,15 +1,13 @@
 class Track < ActiveRecord::Base
-  before_create :default_values
 
   belongs_to :user
   has_many :reviews
+  has_many :votes
 
   validates :title, :artist, :url, presence: true
 
-  private
-
-  def default_values
-    self.votes ||= 0
+  def number_of_votes
+    return self.votes.count
   end
-
+  
 end

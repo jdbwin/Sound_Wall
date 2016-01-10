@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   validates :password, presence: true
 
   has_many :tracks
+  has_many :votes
   has_many :reviews
 
 end

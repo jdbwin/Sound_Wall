@@ -4,5 +4,6 @@ $(document).ready(function() {
     targetVote = $(this).closest('tr').find('.vote-counter');
 
     targetVote.html(parseInt(currentVote) + 1);
+    $(this).hide();
   });
 });
