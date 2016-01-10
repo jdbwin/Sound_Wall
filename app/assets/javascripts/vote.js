@@ -1,5 +1,8 @@
 $(document).ready(function() {
-  $('.increment-vote').click(function() {
-    console.log(parseInt($('.vote-counter').html()) + 1);
+  currentVote = $('.vote-counter').html();
+  $('.increment-vote').click(function(event) {
+    targetVote = $(this).closest('tr').find('.vote-counter');
+
+    targetVote.html(parseInt(currentVote) + 1);
   });
 });
