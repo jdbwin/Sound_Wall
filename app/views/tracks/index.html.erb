@@ -33,19 +33,20 @@
   <tbody>
     <% @tracks.sort_by{|track| track.votes.count}.reverse.each do |track| %>
       <tr>
-        <td class="vote-counter"><%= track.number_of_votes %></td>
-        <td><a href="/tracks/<%= track.id %>"><%= track.title %></a></td>
-        <td><%= track.artist %> </td>
-        <td><%= track.genre %> </td>
-        <td><%= track.user_id %> </td>
-        <% unless user_voted(track) %>
-          <td>
-            <%= button_to "Upvote",
-              votes_path(track_id: track.id), 
-              remote: true, 
-              class: 'increment-vote' %>
-        </td>
-      <% end %>
+        <ul>
+          <td class="vote-counter"><%= track.number_of_votes %></td>
+          <td><a href="/tracks/<%= track.id %>"><%= track.title %></a></td>
+          <td><%= track.artist %> </td>
+          <td><%= track.genre %> </td>
+          <td><%= track.user_id %> </td>
+          <% unless user_voted(track) %>
+            <td>
+              <%= button_to votes_path(track_id: track.id), remote: true, class: 'increment-vote' do %>
+                <%= fa_icon "thumbs-o-up" %>
+              <% end %>
+            </td>
+          <% end %>
+        </ul>
       </tr>
     <% end %>
   </tbody>
