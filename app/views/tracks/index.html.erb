@@ -2,6 +2,22 @@
 
 <%= link_to 'Submit a song!', new_track_path %>
 
+<%= form_tag tracks_path(genre: '', artist: ''), method: 'GET' do %>
+  <div>
+    <%= submit_tag 'Clear Filter' %>
+  </div>
+<% end %>
+
+<%= form_tag tracks_path, method: 'GET' do %>
+  <%= select_tag :genre, options_for_select(['Genre', 'Test', 'Electronic', 'Rap', 'Hip-hop']), onchange: "this.form.submit();" %>
+  <div>
+    <%= text_field_tag :artist, nil, placeholder: 'Artist' %>
+  </div>
+  <div>
+    <%= submit_tag 'Search' %>
+  </div>
+<% end %>
+
 <table>
 
   <thead>
@@ -9,25 +25,27 @@
       <th data-field="upvotes">Upvotes</th>
       <th data-field="title">Title</th>
       <th data-field="artist">Artist</th>
+      <th data-field="genre">Genre</th>
       <th data-field="submitted_by">Submitted By</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @tracks.each do |track| %>
+    <% @tracks.sort_by{|track| track.votes.count}.reverse.each do |track| %>
       <tr>
         <td class="vote-counter"><%= track.number_of_votes %></td>
         <td><a href="/tracks/<%= track.id %>"><%= track.title %></a></td>
         <td><%= track.artist %> </td>
+        <td><%= track.genre %> </td>
         <td><%= track.user_id %> </td>
         <% unless user_voted(track) %>
-        <td>
-          <%= button_to "Upvote",
-          votes_path(track_id: track.id), 
-          remote: true, 
-          class: 'increment-vote' %>
+          <td>
+            <%= button_to "Upvote",
+              votes_path(track_id: track.id), 
+              remote: true, 
+              class: 'increment-vote' %>
         </td>
-        <% end %>
+      <% end %>
       </tr>
     <% end %>
   </tbody>

@@ -3,7 +3,9 @@ class TracksController < ApplicationController
   helper_method :user_voted
 
   def index
-    @tracks = Track.all
+    artist = "%#{params[:artist]}"
+    genre = "%#{params[:genre]}"
+    @tracks = Track.all.artist_search(artist).genre_search(genre)
   end
 
   def new
@@ -28,7 +30,7 @@ class TracksController < ApplicationController
   private
 
   def track_params
-    params.require(:track).permit(:title, :artist, :url).merge(user_id: current_user.id)
+    params.require(:track).permit(:title, :artist, :genre, :url).merge(user_id: current_user.id)
   end
 
 end
